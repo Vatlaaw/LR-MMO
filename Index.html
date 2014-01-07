@@ -101,7 +101,7 @@
 	<div id="errorBox" style="position: absolute; bottom:0px; width:100%; height:278px; background: rgba(0, 0, 0, 0.6)">
 		<h1 style="font-family: Calibri; font-size:48px; text-align: center; color: white">Lost connection to server...</h1>
 		<p style="font-family: Calibri; font-size:32px; text-align: center; color: grey">Attempting re-connect</p>
-		<img src="Resources/Image_ReconnectProgressOuter.png" style="position: absolute; left:40%; width:20%; top: 190px; height: 24px">
+		<img id="reconnectProgressBackground" src="Resources/Image_ReconnectProgressOuter.png" style="position: absolute; left:40%; width:20%; top: 190px; height: 24px">
 		<img id="reconnectProgress" src="Resources/Image_ReconnectProgress.png" style="position: absolute; left:40%; width:0%; top: 190px; height: 24px">
 	</div>
 	<script src="JQuery.js"></script>
@@ -347,7 +347,7 @@ renderer.shadowMapEnabled = true;
 renderer.shadowMapSoft = true;
 var ambientLight = new THREE.AmbientLight(0xCCCCCC);
 // The sun
-var light  = new THREE.SpotLight( 0xffffff );
+var light = new THREE.SpotLight( 0xffffff );
 light.position.set(256, 500, 256);
 light.target.position.set(0, 0, 0);
 light.shadowCameraVisible = isDebugMode;
@@ -735,29 +735,28 @@ function init() {
          */
          var attemptProgress = 0;
          setInterval(function() {
-         	if (reconnectAttempts != 5) {
-	         	attemptProgress++;
-	         	document.getElementById("reconnectProgress").style.width = (attemptProgress / 75) + "%";
-  			} else {
-  				return;
-  			}
-         	if (isDebugMode || attemptProgress % 300 != 0) return;
+         	if (isDebugMode) return;
          	if (connection.readyState != 1) {
          		if (isConnectionReady || !isError) {
          			errorOccurred();
          		} else {
-                    // Attempt re-connect
-                    connection = new WebSocket(serverAddress);
-                    connection.onopen = function(){
-                    	errorStopped();
-                    	return;
-                    };
-                    console.log("Attempting re-connect " + reconnectAttempts);
-                    if (reconnectAttempts == 4) {
-                    	document.getElementById("errorBox").innerHTML = "<h1 style='font-family: Calibri; font-size:48px; text-align: center; color: white'>Failed to re-connect to server</h1><p style='font-family: Calibri; font-size:32px; text-align: center; color: grey'>Please refresh page and check internet connection</p>";
-                    } else {
-                    	reconnectAttempts++;
-                    }
+         			if (reconnectAttempts != 6) {
+         				attemptProgress++;
+         				document.getElementById("reconnectProgress").style.width = (attemptProgress / 90) + '%';
+	         			if (attemptProgress % 300 != 0) return;
+	                    connection = new WebSocket(serverAddress);
+	                    connection.onopen = function(){
+	                    	errorStopped();
+	                    	return;
+	                    };
+	                    console.log("Attempting to open connection to " + serverAddress);
+	                    if (reconnectAttempts == 5) {
+	                    	document.getElementById("errorBox").innerHTML = "<h1 style='font-family: Calibri; font-size:48px; text-align: center; color: white'>Failed to re-connect to server</h1><p style='font-family: Calibri; font-size:32px; text-align: center; color: grey'>Please refresh page and check internet connection</p>";
+	                    	reconnectAttempts++;
+	                    } else {
+	                    	reconnectAttempts++;
+	                    }
+                	}
                 }
             } 
         }, 1);
