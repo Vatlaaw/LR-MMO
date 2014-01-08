@@ -8,7 +8,7 @@ and move it to a more secure directory for running
 "use strict";
 
 // Optional. You will see this name in eg. 'ps' or 'top' command
-process.title = 'Reece luca js mmo server';
+process.title = 'Reece is gay';
 
 
 var webSocketsServerPort = 1337;
