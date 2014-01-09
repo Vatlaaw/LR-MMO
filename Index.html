@@ -1,156 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>LR MMO</title>
+<meta charset="UTF-8">
+<title>LR MMO</title>
 </head>
 <style>
-	#input {
-		border-radius: 2px; 
-		border: 1px solid #000000;
-		margin-top: 10px; 
-		padding: 5px; 
-		width: 480%;  
-		background: rgba(0, 0, 0, 0);
-		outline: none
-	}
-	#user {
-		border-radius: 2px; 
-		border: 1px solid #000000;
-		margin-top: 10px; 
-		padding: 5px; 
-		background: rgba(0, 0, 0, 0);
-		outline: none
-	}
-	#pass {
-		border-radius: 2px; 
-		border: 1px solid #000000;
-		margin-top: 10px; 
-		padding: 5px;
-		background: rgba(0, 0, 0, 0);
-		outline: none
-	}
-	#chatMessageSendBox {
-		width: 100%;
-		height: 64px;
-		position: absolute;
-		float: right;
-		right: 0;
-		bottom: 256px;
-		z-index: 1;
-		overflow-x: hidden;
-		overflow-y: hidden;
-		background-color: rgba(255, 255, 255, 0.2);
-		font-family: Calibri
-	}
-	#chatBox {
-		width: 30%;
-		height: 64px;
-		position: absolute;
-		bottom: 10px;
-		left: 10px;
-		z-index: 1;
-		overflow: scroll;
-		overflow-x: hidden;
-		overflow-y: hidden;
-		background-color: rgba(255, 255, 255, 0);
-		font-family: Calibri;
-		text-shadow: 1px 1px #000000;
-		font-size: 16px; 
-		color: white;
-		line-height:8px
-	}
+#input {
+	border-radius: 2px; 
+border: 1px solid #000000;
+margin-top: 10px; 
+padding: 5px; 
+width: 480%;  
+background: rgba(0, 0, 0, 0);
+outline: none
+}
+#user {
+	border-radius: 2px; 
+border: 1px solid #000000;
+margin-top: 10px; 
+padding: 5px; 
+background: rgba(0, 0, 0, 0);
+outline: none
+}
+#pass {
+	border-radius: 2px; 
+border: 1px solid #000000;
+margin-top: 10px; 
+padding: 5px;
+background: rgba(0, 0, 0, 0);
+outline: none
+}
+#chatMessageSendBox {
+	width: 100%;
+height: 64px;
+position: absolute;
+float: right;
+right: 0;
+bottom: 256px;
+z-index: 1;
+overflow-x: hidden;
+overflow-y: hidden;
+background-color: rgba(255, 255, 255, 0.2);
+font-family: Calibri
+}
+#chatBox {
+	width: 30%;
+height: 64px;
+position: absolute;
+bottom: 10px;
+left: 10px;
+z-index: 1;
+overflow: scroll;
+overflow-x: hidden;
+overflow-y: hidden;
+background-color: rgba(255, 255, 255, 0);
+font-family: Calibri;
+text-shadow: 1px 1px #000000;
+font-size: 16px; 
+color: white;
+line-height:8px
+}
 </style>
 <body style="margin: 0; padding: 0; overflow: hidden" >
-	<div id="loading" style="position: absolute; height: 100%; width: 100%">
-		<img src="Resources/LoadingScreen.jpg" width=100% height=100%/>
-		<div style="position: absolute; top: 20px; width: 100%">
-			<p id="loadingTexturesText" style="color: white; font-family: Calibri; font-size: 18px; text-align: center">Loading textures...</p>
-			<img id="loadingBar" src="Resources/Loading.gif" style="display: block; margin-left: auto; margin-right: auto; top: 10px"/>
-		</div>
-		<div style="position: absolute; top: 0px; right: 20px; color: white; font-family: Calibri; font-size:18px">
-			<p>By Luca Jegard and Reece Lecrivain 2014</p>
-		</div>
-	</div>
-	<div id="chatBox">
-		<div id="content" style="position: absolute; height: 100%; width: 100%; left: 10px">
-			<br>
-			<img src="Resources/Icon_Loading.gif"/>
-			<b>Connecting to server</b>
-		</div>
-	</div>
-	<div id="chatMessageSendBox" style="width:30%; right:10px; bottom:41.5%; height:14%">
-		<div style="position: absolute; height: 20%; width: 20.6%; left: 10px">
-			<span id="status">Connecting...</span>
-			<input type="text" id="input" disabled="disabled" style="width:450%"/>
-		</div>
-	</div>
-	<div id="loginBox" style="position: absolute; top:30%; width:100%; height:50%; background: rgba(0, 0, 0, 0.2)">
-		<div style="width:256px; margin-left:auto; margin-right:auto; margin-top:32px">
-			<img src="Resources/Image_Username.png">
-			<br>
-			<input type="text" id="user" style="font-family: Calibri; font-size:18px; text-align: center; background: rgba(200, 200, 200, 1); width: 256px"/>
-			<br>
-			<img src="Resources/Image_Password.png">
-			<br>
-			<input type="password" id="pass" style="font-family: Calibri; font-size:18px; text-align: center; background: rgba(200, 200, 200, 1); width: 256px"/>
-			<br>
-			<input type="image" src="Resources/Image_LoginButtonA.png" id="submit" name="submit" value="submit" disabled="disabled" style="width: 256px; height: 64px; border: 0"/>
-		</div>
-	</div>
-	<div id="errorBox" style="position: absolute; bottom:0px; width:100%; height:278px; background: rgba(0, 0, 0, 0.6)">
-		<h1 style="font-family: Calibri; font-size:48px; text-align: center; color: white">Lost connection to server...</h1>
-		<p style="font-family: Calibri; font-size:32px; text-align: center; color: grey">Attempting re-connect</p>
-		<img id="reconnectProgressBackground" src="Resources/Image_ReconnectProgressOuter.png" style="position: absolute; left:40%; width:20%; top: 190px; height: 24px">
-		<img id="reconnectProgress" src="Resources/Image_ReconnectProgress.png" style="position: absolute; left:40%; width:0%; top: 190px; height: 24px">
-	</div>
-	<script src="JQuery.js"></script>
-	<script src="Three.min.js"></script>
-	<script src="Detector.js"></script>
-	<script src="stats.min.js"></script>
-	<script src="OrbitControls.js"></script>
-	<!--Cloud test-->
-	<script id="vs" type="x-shader/x-vertex">
+<div id="loading" style="position: absolute; height: 100%; width: 100%">
+<img src="Resources/LoadingScreen.jpg" width=100% height=100%/>
+<div style="position: absolute; top: 20px; width: 100%">
+<p id="loadingTexturesText" style="color: white; font-family: Calibri; font-size: 18px; text-align: center">Loading textures...</p>
+<img id="loadingBar" src="Resources/Loading.gif" style="display: block; margin-left: auto; margin-right: auto; top: 10px"/>
+</div>
+<div style="position: absolute; top: 0px; right: 20px; color: white; font-family: Calibri; font-size:18px">
+<p>By Luca Jegard and Reece Lecrivain 2014</p>
+</div>
+</div>
+<div id="chatBox" style="position: absolute; height: 32px; width: 100%; bottom: 10px">
+<div id="content" style="position: absolute; height: 100%; width: 100%; left: 10px">
+<br>
+<img src="Resources/Icon_Loading.gif"/>
+<b>Connecting to server</b>
+</div>
+</div>
+<div id="chatMessageSendBox" style="width:30%; right:10px; bottom:41.5%; height:14%">
+<div style="position: absolute; height: 20%; width: 20.6%; left: 10px">
+<span id="status">Connecting...</span>
+<input type="text" id="input" disabled="disabled" style="width:450%"/>
+</div>
+</div>
+<div id="loginBox" style="position: absolute; top:30%; width:100%; height:50%; background: rgba(0, 0, 0, 0.2)">
+<div style="width:256px; margin-left:auto; margin-right:auto; margin-top:32px">
+<img src="Resources/Image_Username.png">
+<br>
+<input type="text" id="user" style="font-family: Calibri; font-size:18px; text-align: center; background: rgba(200, 200, 200, 1); width: 256px"/>
+<br>
+<img src="Resources/Image_Password.png">
+<br>
+<input type="password" id="pass" style="font-family: Calibri; font-size:18px; text-align: center; background: rgba(200, 200, 200, 1); width: 256px"/>
+<br>
+<input type="image" src="Resources/Image_LoginButtonA.png" id="submit" name="submit" value="submit" disabled="disabled" style="width: 256px; height: 64px; border: 0"/>
+</div>
+</div>
+<div id="errorBox" style="position: absolute; bottom:0px; width:100%; height:278px; background: rgba(0, 0, 0, 0.6)">
+<h1 style="font-family: Calibri; font-size:48px; text-align: center; color: white">Lost connection to server...</h1>
+<p style="font-family: Calibri; font-size:32px; text-align: center; color: grey">Attempting re-connect</p>
+<img src="Resources/Image_ReconnectProgressOuter.png" style="position: absolute; left:40%; width:20%; top: 190px; height: 24px">
+<img id="reconnectProgress" src="Resources/Image_ReconnectProgress.png" style="position: absolute; left:40%; width:0%; top: 190px; height: 24px">
+</div>
+<script src="JQuery.js"></script>
+<script src="Three.min.js"></script>
+<script src="Detector.js"></script>
+<script src="stats.min.js"></script>
+<script src="OrbitControls.js"></script>
+<!--Cloud test-->
+<script id="vs" type="x-shader/x-vertex">
 
-		varying vec2 vUv;
+varying vec2 vUv;
 
-		void main() {
+void main() {
 
-			vUv = uv;
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+	vUv = uv;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
-		}
+}
 
-	</script>
+</script>
 
-	<script id="fs" type="x-shader/x-fragment">
+<script id="fs" type="x-shader/x-fragment">
 
-		uniform sampler2D map;
+uniform sampler2D map;
 
-		uniform vec3 fogColor;
-		uniform float fogNear;
-		uniform float fogFar;
+uniform vec3 fogColor;
+uniform float fogNear;
+uniform float fogFar;
 
-		varying vec2 vUv;
+varying vec2 vUv;
 
-		void main() {
+void main() {
 
-			float depth = gl_FragCoord.z / gl_FragCoord.w;
-			float fogFactor = smoothstep( fogNear, fogFar, depth );
+	float depth = gl_FragCoord.z / gl_FragCoord.w;
+	float fogFactor = smoothstep( fogNear, fogFar, depth );
 
-			gl_FragColor = texture2D( map, vUv );
-			gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
-			gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
+	gl_FragColor = texture2D( map, vUv );
+	gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
+	gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
 
-		}
+}
 
-	</script>
-	<!--Cloud test end-->
-	<script>
-    // Copyright Luca Jegard and Reece Lecrivain 2013
-    // FOR TRANSPARENT TEXTURE USE PNG AND TRANSPARENT CONSTRUCTOR
-    //new THREE.MeshPhongMaterial({map: texture, transparent: true})
-    if (!Detector.webgl) Detector.addGetWebGLMessage();
+</script>
+<!--Cloud test end-->
+<script>
+// Copyright Luca Jegard and Reece Lecrivain 2013
+// FOR TRANSPARENT TEXTURE USE PNG AND TRANSPARENT CONSTRUCTOR
+//new THREE.MeshPhongMaterial({map: texture, transparent: true})
+if (!Detector.webgl) Detector.addGetWebGLMessage();
 //
 //   +=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
 //   |MAP NUMBER REFERENCE SHEET                         |\
@@ -335,7 +335,7 @@ var heightmap = [
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var isLoading = true, isMovingLeft = false, isMovingRight = false;
 var isMovingForward = false, isMovingBackward = false, isUsingChat = false;
-var isConnectionReady = false, isLoggedIn = false, isDebugMode = true, isError = false, isPlayerVisible = true, isChatVisible = true, isFPSMeterVisible = true;
+var isConnectionReady = false, isLoggedIn = false, isDebugMode = false, isError = false, isPlayerVisible = true, isChatVisible = true, isFPSMeterVisible = true;
 var isCordConnectionReady = false, isLeftMouseButtonDown = false, isRightMouseButtonDown = false;
 var objectsLoaded = 0;
 var container, stats;
@@ -346,7 +346,7 @@ renderer.shadowMapEnabled = true;
 renderer.shadowMapSoft = true;
 var ambientLight = new THREE.AmbientLight(0xCCCCCC);
 // The sun
-var light = new THREE.SpotLight( 0xffffff );
+var light  = new THREE.SpotLight( 0xffffff );
 light.position.set(256, 500, 256);
 light.target.position.set(0, 0, 0);
 light.shadowCameraVisible = isDebugMode;
@@ -377,7 +377,7 @@ var user;
 var sendCord;
 var controls;
 controls = new THREE.OrbitControls( camera );
-var serverAddress = "ws://192.168.1.4:1337";
+var serverAddress = "ws://localhost:1337";
 var reconnectAttempts = 0;
 var timeScale = 0.00005;
 var skybox;
@@ -385,19 +385,19 @@ var skybox;
 // MOON TEST BETA
 var sphereMaterial =
 new THREE.MeshPhongMaterial(
-{
-	transparent: true,
-	map: THREE.ImageUtils.loadTexture( 'moon.png', null ),
-	fog: false
-});
+		{
+			transparent: true,
+			map: THREE.ImageUtils.loadTexture( 'moon.png', null ),
+			fog: false
+		});
 var sphere = new THREE.Mesh(
 
-	new THREE.SphereGeometry(
-		64,
-		64,
-		64),
+		new THREE.SphereGeometry(
+				64,
+				64,
+				64),
 
-	sphereMaterial);
+				sphereMaterial);
 
 sphere.position.set(-704, -128, -704);
 scene.add(sphere);
@@ -456,38 +456,38 @@ $(document).ready(function (){
 init();
 
 function init() {
-    // Hide the login box until a connection has been made to the server
-    // Since 1.4
-    $('#loginBox').hide();
+	// Hide the login box until a connection has been made to the server
+	// Since 1.4
+	$('#loginBox').hide();
 
-    // Hide the chat box
-    $('#chatBox').hide();
-    
-    // Hide the error box
-    $('#errorBox').hide();
+	// Hide the chat box
+	$('#chatBox').hide();
 
-    // Hide the loading textures text
-    $('#loadingTexturesText').hide();
+	// Hide the error box
+	$('#errorBox').hide();
 
-    // Hide the loading bar
-    $('#loadingBar').hide();
+	// Hide the loading textures text
+	$('#loadingTexturesText').hide();
 
-    // Hide the chat messange send box
-    $('#chatMessageSendBox').hide();
-    
-    // Set the renderer size and apend the dom element
-    renderer.setSize(window.innerWidth, window.innerHeight); 
-    document.body.appendChild(renderer.domElement);
-    
-    // CLOUD TEST
-    /*
+	// Hide the loading bar
+	$('#loadingBar').hide();
+
+	// Hide the chat messange send box
+	$('#chatMessageSendBox').hide();
+
+	// Set the renderer size and apend the dom element
+	renderer.setSize(window.innerWidth, window.innerHeight); 
+	document.body.appendChild(renderer.domElement);
+
+	// CLOUD TEST
+	/*
     geometry = new THREE.Geometry();
                 var texture = THREE.ImageUtils.loadTexture( 'cloud10.png', null );
 
                 texture.magFilter = THREE.LinearMipMapLinearFilter;
                 texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-                
+
 
                 material = new THREE.ShaderMaterial( {
 
@@ -531,273 +531,276 @@ function init() {
                 mesh.fog = false;
                 mesh.position.z = - 8000;
                 scene.add( mesh );
-                */
-    // END CLOUD TEST
+	 */
+	// END CLOUD TEST
 
-    $(function () {
-    	"use strict";
+	$(function () {
+		"use strict";
 
-        // for better performance - to avoid searching in DOM
-        var content = $('#content');
-        var input = $('#input');
-        var status = $('#status');
-        var submit = $('#submit');
+		// for better performance - to avoid searching in DOM
+		var content = $('#content');
+		var input = $('#input');
+		var status = $('#status');
+		var submit = $('#submit');
 
-        // my color assigned by the server
-        var myColor = false;
-        // my name sent to the server
-        var myName = false;
+		// my color assigned by the server
+		var myColor = false;
+		// my name sent to the server
+		var myName = false;
 
-        // if user is running mozilla then use it's built-in WebSocket
-        window.WebSocket = window.WebSocket || window.MozWebSocket;
+		// if user is running mozilla then use it's built-in WebSocket
+		window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-        // if browser doesn't support WebSocket, just show some notification and exit
-        if (!window.WebSocket) {
-        	content.html($('<p>', { text: 'Sorry, but your browser doesn\'t support WebSockets.'} ));
-        	input.hide();
-        	$('span').hide();
-        	return;
-        }
-
-        // Handle debug mode
-        if (isDebugMode) {
-        	// Set username
-        	user = "DebugUser";
-
-        	myName = "DebugUser";
-        	playerName = myName;
-
-            // Preform login, includes downloading resources and preparing map ect.
-            preformLogin();
-
-            // Show the chat box
-            if (isChatVisible) $('#chatBox').show();
-
-            // FPS and latency counter
-            if (isFPSMeterVisible) {
-            	container = document.createElement('div');
-            	document.body.appendChild(container);
-            	stats = new Stats();
-            	stats.domElement.style.position = 'absolute';
-            	stats.domElement.style.top = '0px';
-            	container.appendChild(stats.domElement);
-            }
-
-            // The player has logged in
-            isLoggedIn = true;
-
-            // Connect to local
-            isConnectionReady = false;
-            document.getElementById("content").innerHTML = "<br><img src='Resources/Icon_Amentrix.ico'/><b> Connected to local debug server</b>";
-        }
-
-        // open connection
-        var connection = new WebSocket(serverAddress);
-
-        // when the connection is opened
-        connection.onopen = function () {
-        	// Show the login box
-        	// Since 1.4
-        	$('#loginBox').show();
-            // Enable the login button
-            submit.removeAttr('disabled');
-            // first we want users to enter their names
-            input.removeAttr('disabled');
-            // clear the loading thingy
-            isConnectionReady = true;
-            isCordConnectionReady = true;
-            document.getElementById("content").innerHTML = "<br><img src='Resources/Icon_Amentrix.ico'/><b> Connected to Server</b>";
-        };
-
-        connection.onerror = function (error) {
-            // just in there were some problems with conenction...
-            if (!isDebugMode) errorOccurred();
-        };
-
-        // most important part - incoming messages
-        connection.onmessage = function (message) {
-            // try to parse JSON message. Because we know that the server always returns
-            // JSON this should work without any problem but we should make sure that
-            // the massage is not chunked or otherwise damaged.
-            try {
-            	var json = JSON.parse(message.data);
-            } catch (e) {
-            	console.log('This doesn\'t look like a valid JSON: ', message.data);
-            	return;
-            }
-            // NOTE: if you're not sure about the JSON structure
-            // check the server source code above
-            if (json.type === 'color') { // first response from the server with user's color
-            	myColor = json.data;
-            status.text(myName + ': ').css('color', myColor);
-            input.removeAttr('disabled').focus();
-                // from now user can start sending messages
-            } else if (json.type === 'history') { // entire message history
-                // insert every single message to the chat window
-                for (var i=0; i < json.data.length; i++) {
-                	if (json.data[i].author == "Server") {
-                		addServerMessage(json.data[i].text);
-                	} else {
-                		addMessage(json.data[i].author, json.data[i].text, json.data[i].color, new Date(json.data[i].time));
-                	}
-                }
-            } else if (json.type === 'message') { // it's a single message
-                input.removeAttr('disabled'); // let the user write another message
-                if (json.data.author == "Server") {
-                	addServerMessage(json.data.text);
-                } else {
-                	addMessage(json.data.author, json.data.text,json.data.color, new Date(json.data.time));
-                }
-            } else if (json.type === 'pc'){
-            	var cordMessage = json.data;
-            	var cordSplit = cordMessage.split(",");
-            	createOtherPlayers(cordSplit[0],cordSplit[1],cordSplit[2],cordSplit[3]);
-            }else if(json.type==='mp'){
-            	var data = json.data;
-            	var cords= data.split("@");
-            	var mapsplit = cords[2];
-            	var maparr = mapsplit.split(",");
-            	for(var i=0;i<maparr.length;i++){
-            		map[i]=parseInt(maparr[i]);
-            	}
-            	isMapDownloaded = true;
-		//createMap(parseInt(cords[0]),parseInt(cords[1]));
-	}else if(json.type==='mr'){
-		var maprotsplit = json.data;
-		var maprotarr = maprotsplit.split(",");
-		for(var i =0; i < maprotarr.length;i++){
-			maprotation[i] = parseInt(maprotarr[i]);
+		// if browser doesn't support WebSocket, just show some notification and exit
+		if (!window.WebSocket) {
+			content.html($('<p>', { text: 'Sorry, but your browser doesn\'t support WebSockets.'} ));
+			input.hide();
+			$('span').hide();
+			return;
 		}
-	}else if(json.type ==='hm'){
-		var hms = json.data;
-		var hma = hms.split(",");
-		for(var i = 0; i < hma.length;i++){
-			heightmap[i]=hma[i];
+
+		// Handle debug mode
+		if (isDebugMode) {
+			// Set username
+			user = "DebugUser";
+
+			myName = "DebugUser";
+			playerName = myName;
+
+			// Preform login, includes downloading resources and preparing map ect.
+			preformLogin();
+
+			// Show the chat box
+			if (isChatVisible) $('#chatBox').show();
+
+			// FPS and latency counter
+			if (isFPSMeterVisible) {
+				container = document.createElement('div');
+				document.body.appendChild(container);
+				stats = new Stats();
+				stats.domElement.style.position = 'absolute';
+				stats.domElement.style.top = '0px';
+				container.appendChild(stats.domElement);
+			}
+
+			// The player has logged in
+			isLoggedIn = true;
+
+			// Connect to local
+			isConnectionReady = false;
+			document.getElementById("content").innerHTML = "<br><img src='Resources/Logo.ico'/><b> Connected to local virtual private server</b>";
+			addRawMessage("<p>Your client is in debug mode. Visual guides will be shown and information will be printed to the chat or console</p>");
+			//for (var i = 0; i < 100; i++) addRawMessage("<p>" + i + "</p>");
 		}
-	}else {
-		console.log('Hmm..., I\'ve never seen JSON like this: ', json);
-	}
-};
 
-        // Send mesage when user presses Enter key
-        $('#submit').click(function() {
-        	// Send login to server
-        	var msg = $('#user').val() + "=" + $('#pass').val();
-        	user = $('#user').val();
-        	connection.send(msg);
+		// open connection
+		var connection = new WebSocket(serverAddress);
 
-	    	// Set the player name
-	    	if (!myName) {
-	    		myName = $('#user').val();
-	    		playerName = myName;
-	    	}
+		// when the connection is opened
+		connection.onopen = function () {
+			// Show the login box
+			// Since 1.4
+			$('#loginBox').show();
+			// Enable the login button
+			submit.removeAttr('disabled');
+			// first we want users to enter their names
+			input.removeAttr('disabled');
+			// clear the loading thingy
+			isConnectionReady = true;
+			isCordConnectionReady = true;
+			document.getElementById("content").innerHTML = "<br><img src='Resources/Logo.ico'/><b> Connected to Server</b>";
+		};
 
-            // Preform login, includes downloading resources and preparing map ect.
-            preformLogin();
+		connection.onerror = function (error) {
+			// just in there were some problems with conenction...
+			if (!isDebugMode) errorOccurred();
+		};
 
-            // Hide the login box
-            $('#loginBox').hide();
+		// most important part - incoming messages
+		connection.onmessage = function (message) {
+			// try to parse JSON message. Because we know that the server always returns
+			// JSON this should work without any problem but we should make sure that
+			// the massage is not chunked or otherwise damaged.
+			try {
+				var json = JSON.parse(message.data);
+			} catch (e) {
+				console.log('This doesn\'t look like a valid JSON: ', message.data);
+				return;
+			}
+			// NOTE: if you're not sure about the JSON structure
+			// check the server source code above
+			if (json.type === 'color') { // first response from the server with user's color
+				myColor = json.data;
+				status.text(myName + ': ').css('color', myColor);
+				input.removeAttr('disabled').focus();
+				// from now user can start sending messages
+			} else if (json.type === 'history') { // entire message history
+				// insert every single message to the chat window
+				for (var i=0; i < json.data.length; i++) {
+					if (json.data[i].author == "Server") {
+						addServerMessage(json.data[i].text);
+					} else {
+						addMessage(json.data[i].author, json.data[i].text, json.data[i].color, new Date(json.data[i].time));
+					}
+				}
+			} else if (json.type === 'message') { // it's a single message
+				input.removeAttr('disabled'); // let the user write another message
+				if (json.data.author == "Server") {
+					addServerMessage(json.data.text);
+				} else {
+					addMessage(json.data.author, json.data.text,json.data.color, new Date(json.data.time));
+				}
+			} else if (json.type === 'pc'){
+				var cordMessage = json.data;
+				var cordSplit = cordMessage.split(",");
+				createOtherPlayers(cordSplit[0],cordSplit[1],cordSplit[2],cordSplit[3]);
+			}else if(json.type==='mp'){
+				var data = json.data;
+				var cords = data.split("@");
+				var rawMap = cords[2].split(",");
+				for (var i = 0; i < rawMap.length; i++) {
+					map[i] = parseInt(rawMap[i]);
+					//console.log("Downloaded map part " + i + " = " + rawMap[i]);
+				}
+				isMapDownloaded = true;
+				//createMap(parseInt(cords[0]), parseInt(cords[1]));
+			}else if(json.type==='mr'){
+				var rawMapRotations = json.data;
+				for (var i = 0; i < rawMapRotations.length; i++) {
+					maprotation[i] = parseInt(rawMapRotations[i]);
+					//console.log("Downloaded map rotations part " + i + " = " + rawMapRotations[i]);
+				}
+			}else if(json.type ==='hm'){
+				var rawMapHeightmap = json.data;
+				for (var i = 0; i < rawMapHeightmap.length; i++) {
+					heightmap[i] = parseInt(rawMapHeightmap[i]);
+					//console.log("Downloaded map heightmap part " + i + " = " + rawMapHeightmap[i]);
+				}
+			}else {
+				console.log('Hmm..., I\'ve never seen JSON like this: ', json);
+			}
+		};
 
-            // Show the chat box
-            if (isChatVisible) $('#chatBox').show();
+		// Send mesage when user presses Enter key
+		$('#submit').click(function() {
+			// Send login to server
+			var msg = $('#user').val() + "=" + $('#pass').val();
+			user = $('#user').val();
+			connection.send(msg);
 
-            // FPS and latency counter
-            container = document.createElement('div');
-            document.body.appendChild(container);
-            stats = new Stats();
-            stats.domElement.style.position = 'absolute';
-            stats.domElement.style.top = '0px';
-            container.appendChild(stats.domElement);
+			// Set the player name
+			if (!myName) {
+				myName = $('#user').val();
+				playerName = myName;
+			}
 
-            // The player has logged in
-            isLoggedIn = true;
-        });
-        input.keydown(function(e) {
-        	if (e.keyCode === 13) {
-        		var msg = $(this).val();
-        		if (!msg) {
-        			return;
-        		}
-                // send the message as an ordinary text
-                connection.send(msg);
-                $(this).val('');
-                // disable the input field to make the user wait until server
-                // sends back response
-                input.attr('disabled', 'disabled');
-            }
-        });
+			// Preform login, includes downloading resources and preparing map ect.
+			preformLogin();
 
-        /**
-         * This method is optional. If the server wasn't able to respond to the
-         * in 3 seconds then show some error message to notify the user that
-         * something is wrong.
-         */
-         var attemptProgress = 0;
-         setInterval(function() {
-         	if (isDebugMode) return;
-         	if (connection.readyState != 1) {
-         		if (isConnectionReady || !isError) {
-         			errorOccurred();
-         		} else {
-         			if (reconnectAttempts != 6) {
-         				attemptProgress++;
-         				document.getElementById("reconnectProgress").style.width = (attemptProgress / 90) + '%';
-	         			if (attemptProgress % 300 != 0) return;
-	                    connection = new WebSocket(serverAddress);
-	                    connection.onopen = function(){
-	                    	errorStopped();
-	                    	return;
-	                    };
-	                    console.log("Attempting to open connection to " + serverAddress);
-	                    if (reconnectAttempts == 5) {
-	                    	document.getElementById("errorBox").innerHTML = "<h1 style='font-family: Calibri; font-size:48px; text-align: center; color: white'>Failed to re-connect to server</h1><p style='font-family: Calibri; font-size:32px; text-align: center; color: grey'>Please refresh page and check internet connection</p>";
-	                    	reconnectAttempts++;
-	                    } else {
-	                    	reconnectAttempts++;
-	                    }
-                	}
-                }
-            } 
-        }, 1);
+			// Hide the login box
+			$('#loginBox').hide();
 
-        // Add message to the chat window
-        function addMessage(author, message, color, dt) {
-        	content.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
-        		+ (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
-        		+ (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
-        		+ ': ' + message + '</p>');
-        	var elem = document.getElementById('chatBox');
-        	if (elem.height() != 256) elem.height(elem.height() + 32);
-        	elem.scrollTop = elem.scrollHeight;
-        }
-        function addServerMessage(message) {
-        	content.append(message);
-        	var elem = document.getElementById('chatBox');
-        	if (elem.height() != 256) elem.height(elem.height() + 32);
-        	elem.scrollTop = elem.scrollHeight;
-        }
-        sendCord = function(name,xcord,zcord,rot){
-        	if(isCordConnectionReady){
-        		var cordData = "pc"+","+name+","+xcord+","+zcord+","+rot;
-        		connection.send(cordData);
-        	}
-        }
-    });    
-    // Add the event listeners
-    document.addEventListener('keydown', onDocumentKeyDown, false );
-    document.addEventListener('keyup', onDocumentKeyUp, false );  
-    document.addEventListener('mousedown', onMouseButtonDown, false );
-    document.addEventListener('mouseup', onMouseButtonUp, false );
-    window.addEventListener('resize', onWindowResize, false );
-    document.addEventListener('mousemove', onDocumentMouseMove, false );
+			// Show the chat box
+			if (isChatVisible) $('#chatBox').show();
+
+			// FPS and latency counter
+			container = document.createElement('div');
+			document.body.appendChild(container);
+			stats = new Stats();
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.top = '0px';
+			container.appendChild(stats.domElement);
+
+			// The player has logged in
+			isLoggedIn = true;
+		});
+		input.keydown(function(e) {
+			if (e.keyCode === 13) {
+				var msg = $(this).val();
+				if (!msg) {
+					return;
+				}
+				// send the message as an ordinary text
+				connection.send(msg);
+				$(this).val('');
+				// disable the input field to make the user wait until server
+				// sends back response
+				input.attr('disabled', 'disabled');
+			}
+		});
+
+		/**
+		 * This method is optional. If the server wasn't able to respond to the
+		 * in 3 seconds then show some error message to notify the user that
+		 * something is wrong.
+		 */
+		var attemptProgress = 0;
+		setInterval(function() {
+			if (reconnectAttempts != 5) {
+				attemptProgress++;
+				document.getElementById("reconnectProgress").style.width = (attemptProgress / 75) + "%";
+			} else {
+				return;
+			}
+			if (isDebugMode || attemptProgress % 300 != 0) return;
+			if (connection.readyState != 1) {
+				if (isConnectionReady || !isError) {
+					errorOccurred();
+				} else {
+					// Attempt re-connect
+					connection = new WebSocket(serverAddress);
+					connection.onopen = function(){
+						errorStopped();
+						return;
+					};
+					console.log("Attempting re-connect " + reconnectAttempts);
+					if (reconnectAttempts == 4) {
+						document.getElementById("errorBox").innerHTML = "<h1 style='font-family: Calibri; font-size:48px; text-align: center; color: white'>Failed to re-connect to server</h1><p style='font-family: Calibri; font-size:32px; text-align: center; color: grey'>Please refresh page and check internet connection</p>";
+					} else {
+						reconnectAttempts++;
+					}
+				}
+			} 
+		}, 1);
+
+		// Add message to the chat window
+		function addMessage(author, message, color, dt) {
+			content.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
+					+ (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
+					+ (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
+					+ ': ' + message + '</p>');
+			var elem = document.getElementById('chatBox');
+			if (elem.height() != 256) elem.height(elem.height() + 32);
+			elem.scrollTop = elem.scrollHeight;
+		}
+		function addServerMessage(message) {
+			content.append(message);
+			var elem = document.getElementById('chatBox');
+			if (elem.height() != 256) elem.height(elem.height() + 32);
+			elem.scrollTop = elem.scrollHeight;
+		}
+		sendCord = function(name,xcord,zcord,rot){
+			if(isCordConnectionReady){
+				var cordData = "pc"+","+name+","+xcord+","+zcord+","+rot;
+				connection.send(cordData);
+			}
+		}
+	});    
+	// Add the event listeners
+	document.addEventListener('keydown', onDocumentKeyDown, false );
+	document.addEventListener('keyup', onDocumentKeyUp, false );  
+	document.addEventListener('mousedown', onMouseButtonDown, false );
+	document.addEventListener('mouseup', onMouseButtonUp, false );
+	window.addEventListener('resize', onWindowResize, false );
+	document.addEventListener('mousemove', onDocumentMouseMove, false );
 }
 
 function preformLogin() {
 	// Show the loading textures text
-    $('#loadingTexturesText').show();
+	$('#loadingTexturesText').show();
 
-    // Show the loading bar
-    $('#loadingBar').show();
+	// Show the loading bar
+	$('#loadingBar').show();
 
 	// Download and load the textures
 	textureList["Hut"] = THREE.ImageUtils.loadTexture('Resources/Texture_Hut.png', null, load);
@@ -824,6 +827,7 @@ function preformLogin() {
 	textureList["SkyBoxTropicalABottom"] = THREE.ImageUtils.loadTexture('Resources/SkyBoxes/Bottom_TropicalA.jpg', null, load);
 	textureList["SkyBoxTropicalAFront"] = THREE.ImageUtils.loadTexture('Resources/SkyBoxes/Front_TropicalA.jpg', null, load);
 	textureList["SkyBoxTropicalABack"] = THREE.ImageUtils.loadTexture('Resources/SkyBoxes/Back_TropicalA.jpg', null, load);
+	if (isDebugMode) addRawMessage("<p>Loaded textures</p>");
 
 	// Download and load the meshes
 	new THREE.JSONLoader().load('Resources/Model_Hut.js', function (geo) {meshList["Hut"] = geo; load();});
@@ -842,45 +846,46 @@ function preformLogin() {
 	new THREE.JSONLoader().load('Resources/Model_HouseE.js', function (geo) {meshList["HouseE"] = geo; load();});
 	new THREE.JSONLoader().load('Resources/Model_HouseF.js', function (geo) {meshList["HouseF"] = geo; load();});
 	new THREE.JSONLoader().load('Resources/Model_Pavillon.js', function (geo) {meshList["Pavillon"] = geo; load();});
+	if (isDebugMode) addRawMessage("<p>Loaded meshes</p>");
 
 	// Set the scene fog
 	scene.fog = new THREE.Fog(0xcce0ff, 85, 512);
 
-    // Projector to handle world/screen calculations
-    projector = new THREE.Projector();
+	// Projector to handle world/screen calculations
+	projector = new THREE.Projector();
 
-    // Place the map elements
-    createSkybox();
-    createMap(-200,-160);
-    createBasicObject("ReeceHouse", "Hut", 0, 2, 0, 0, 2);
-    createGrass(44, 88, 512, 512);
+	// Place the map elements
+	createSkybox();
+	createMap(-200,-160);
+	createBasicObject("ReeceHouse", "Hut", 0, 2, 0, 0, 2);
+	createGrass(44, 88, 512, 512);
 
-    // Create the player
-    player = new THREE.Mesh(new THREE.CubeGeometry(1, 2, 1), new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, transparent: true}));
-    player.castShadow = true;
-    player.receiveShadow = true;
-    player.position.set(100, -2, 100);
-    player.visible = isPlayerVisible;
+	// Create the player
+	player = new THREE.Mesh(new THREE.CubeGeometry(1, 2, 1), new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, transparent: true}));
+	player.castShadow = true;
+	player.receiveShadow = true;
+	player.position.set(100, -2, 100);
+	player.visible = isPlayerVisible;
 
 	// Default camera position
 	scene.add(player);
 	player.add(camera);      
 	camera.position.y += 30;
 
-    // Add subtle ambient lighting
-    scene.add(ambientLight);
-    //renderer.setClearColorHex( 0xcce0ff, 1 );
-    
-    // Add directional light source
-    var directionalLight = new THREE.DirectionalLight(0xCCCCCC);
-    directionalLight.position.set(1, 1, 1).normalize();
-    scene.add(directionalLight);
+	// Add subtle ambient lighting
+	scene.add(ambientLight);
+	//renderer.setClearColorHex( 0xcce0ff, 1 );
 
-    // Call the render loop
-    render();
+	// Add directional light source
+	var directionalLight = new THREE.DirectionalLight(0xCCCCCC);
+	directionalLight.position.set(1, 1, 1).normalize();
+	scene.add(directionalLight);
 
-    // Call the player movement loop
-    movement();
+	// Call the render loop
+	render();
+
+	// Call the player movement loop
+	movement();
 }
 
 // Draw an object on the scene
@@ -908,15 +913,15 @@ function createRoad(x, z, w, h){
 	roadTexture.wrapS = roadTexture.wrapT = THREE.RepeatWrapping;
 	roadTexture.repeat.set(100, 100);
 	material = new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, map: roadTexture });
-    //new THREE.MeshBasicMaterial({color: color})
-    var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
-    plane.overdraw = true;
-    plane.position.set(x, -2.99, z);
-    plane.rotation.z = Math.PI / 2;
-    plane.rotation.x = -Math.PI / 2;
-    plane.castShadow = true;
-    plane.receiveShadow = true;
-    scene.add(plane);
+	//new THREE.MeshBasicMaterial({color: color})
+	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
+	plane.overdraw = true;
+	plane.position.set(x, -2.99, z);
+	plane.rotation.z = Math.PI / 2;
+	plane.rotation.x = -Math.PI / 2;
+	plane.castShadow = true;
+	plane.receiveShadow = true;
+	scene.add(plane);
 }
 
 // Draw a grass plane on the scene
@@ -925,19 +930,19 @@ function createGrass(x, z, w, h){
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 	texture.repeat.set(40, 40);
 	material = new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, map: texture });
-    //new THREE.MeshBasicMaterial({color: color})//plane geometry takes 4 arguments w,h and the last 2 are the
-    //amount of segments on x and y
-    var prePlane =new THREE.PlaneGeometry(w, h, 49, 49);
-    for(var i =0; i < (prePlane.vertices).length; i++){
-    	prePlane.vertices[i].z=heightmap[i];
-    }
-    var plane = new THREE.Mesh(prePlane, material);
-    plane.overdraw = true;
-    plane.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-    plane.position.set(x,-3,z);
-    plane.castShadow = true;
-    plane.receiveShadow = true;
-    scene.add(plane);
+	//new THREE.MeshBasicMaterial({color: color})//plane geometry takes 4 arguments w,h and the last 2 are the
+	//amount of segments on x and y
+	var prePlane =new THREE.PlaneGeometry(w, h, 49, 49);
+	for(var i =0; i < (prePlane.vertices).length; i++){
+		prePlane.vertices[i].z=heightmap[i];
+	}
+	var plane = new THREE.Mesh(prePlane, material);
+	plane.overdraw = true;
+	plane.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+	plane.position.set(x,-3,z);
+	plane.castShadow = true;
+	plane.receiveShadow = true;
+	scene.add(plane);
 }
 
 function createSkybox() {
@@ -949,7 +954,7 @@ function createSkybox() {
 	materialArray.push(new THREE.MeshBasicMaterial( { map: textureList["SkyBoxTropicalAFront"], fog: false }));
 	materialArray.push(new THREE.MeshBasicMaterial( { map: textureList["SkyBoxTropicalABack"], fog: false }));
 	for (var i = 0; i < 6; i++) materialArray[i].side = THREE.BackSide;
-		var skyboxMaterial = new THREE.MeshFaceMaterial(materialArray);
+	var skyboxMaterial = new THREE.MeshFaceMaterial(materialArray);
 	var skyboxGeom = new THREE.CubeGeometry(2048, 2048, 2048, 1, 1, 1);
 	skybox = new THREE.Mesh( skyboxGeom, skyboxMaterial );
 	skybox.color = 0x00ffff;
@@ -976,49 +981,49 @@ function createOtherPlayers(name, xcord, zcord, rot){
 }
 
 function createMap(px,pz){
-    // Map creation
-    var cases = new Array();
-    cases[1] = "Hut";
-    cases[2] = "HouseC";
-    cases[3] = "Church";
-    cases[4] = "RespawnPoint";
-    cases[5] = "Well";
-    cases[6] = "WitchHut";
-    cases[7] = "Tower";
-    cases[8] = "RockA";
-    cases[9] = "RockC";
-    cases[10] = "RockB";
-    cases[11] = "RockA";
-    cases[12] = "RockC";
-    cases[13] = "RockB";
-    cases[14] = "FarmHouse";
-    cases[15] = "HouseA";
-    cases[16] = "HouseD";
-    cases[17] = "HouseE";
-    cases[18] = "Pavillon";
-    cases[19] = "HouseF";//-200      -160
-    var placementx = px, placementz = pz;
-    var c = 0, p =0;
-    for(var i = 0; i < map.length; i++) {
-    	if(c>=50) {
-    		c = 0;
-    		p++;
-    	}
-    	if(map[i]!=0){
-    		if(map[i] == 8 || map[i] == 9 || map[i] == 10|| map[i] == 11|| map[i] == 12 || map[i] == 13){
-    			createBasicObject(21,cases[map[i]],c*10+placementx,-5,p*10+placementz,i,5,5);
-    		} else if(map[i] == 1){
-    			createBasicObject(21,cases[map[i]],c*10+placementx,2,p*10+placementz,maprotation[i],2,1);
-    		} else if(map[i]==7){
-    			createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],2,1);
-    		} else if(map[i] == 19 || map[i] == 18){
-    			createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],1,1);
-    		} else {
-    			createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],2,1);
-    		}
-    	}
-    	c++;
-    }
+	// Map creation
+	var cases = new Array();
+	cases[1] = "Hut";
+	cases[2] = "HouseC";
+	cases[3] = "Church";
+	cases[4] = "RespawnPoint";
+	cases[5] = "Well";
+	cases[6] = "WitchHut";
+	cases[7] = "Tower";
+	cases[8] = "RockA";
+	cases[9] = "RockC";
+	cases[10] = "RockB";
+	cases[11] = "RockA";
+	cases[12] = "RockC";
+	cases[13] = "RockB";
+	cases[14] = "FarmHouse";
+	cases[15] = "HouseA";
+	cases[16] = "HouseD";
+	cases[17] = "HouseE";
+	cases[18] = "Pavillon";
+	cases[19] = "HouseF";//-200      -160
+	var placementx = px, placementz = pz;
+	var c = 0, p =0;
+	for(var i = 0; i < map.length; i++) {
+		if(c>=50) {
+			c = 0;
+			p++;
+		}
+		if(map[i]!=0){
+			if(map[i] == 8 || map[i] == 9 || map[i] == 10|| map[i] == 11|| map[i] == 12 || map[i] == 13){
+				createBasicObject(21,cases[map[i]],c*10+placementx,-5,p*10+placementz,i,5,5);
+			} else if(map[i] == 1){
+				createBasicObject(21,cases[map[i]],c*10+placementx,2,p*10+placementz,maprotation[i],2,1);
+			} else if(map[i]==7){
+				createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],2,1);
+			} else if(map[i] == 19 || map[i] == 18){
+				createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],1,1);
+			} else {
+				createBasicObject(21,cases[map[i]],c*10+placementx,-3,p*10+placementz,maprotation[i],2,1);
+			}
+		}
+		c++;
+	}
 }
 
 function objectDistance2D(p1, p2){//returns distance between 2 objects
@@ -1049,44 +1054,44 @@ function onMouseButtonUp( event ) {
 function onDocumentKeyDown( event ) {
 	if (isUsingChat) return;
 	switch ( event.keyCode ) {
-    // A or Left Arrow
-    case 37: isMovingLeft = true; break;
-    case 65: isMovingLeft = true; break;
-    // D or Right Arrow
-    case 39: isMovingRight = true; break;
-    case 68: isMovingRight = true; break;
-    // S or Down Arrow
-    case 40: isMovingBackward = true; break;
-    case 83: isMovingBackward = true; break;
-    // W or Up Arrow
-    case 38: isMovingForward = true; break;
-    case 87: isMovingForward = true; break;
-}
+	// A or Left Arrow
+	case 37: isMovingLeft = true; break;
+	case 65: isMovingLeft = true; break;
+	// D or Right Arrow
+	case 39: isMovingRight = true; break;
+	case 68: isMovingRight = true; break;
+	// S or Down Arrow
+	case 40: isMovingBackward = true; break;
+	case 83: isMovingBackward = true; break;
+	// W or Up Arrow
+	case 38: isMovingForward = true; break;
+	case 87: isMovingForward = true; break;
+	}
 }
 
 // Key up listener
 function onDocumentKeyUp( event ) {
 	if(!isUsingChat) {
 		switch ( event.keyCode ) {
-        // A or Left Arrow
-        case 37: isMovingLeft = false; break;
-        case 65: isMovingLeft = false; break;
-        // D or Right Arrow
-        case 39: isMovingRight = false; break;
-        case 68: isMovingRight = false; break;
-        // S or Down Arrow
-        case 40: isMovingBackward = false; break;
-        case 83: isMovingBackward = false; break;
-        // W or Up Arrow
-        case 38: isMovingForward = false; break;
-        case 87: isMovingForward = false; break;
-    }
-}
-if (isConnectionReady) {
-        switch(event.keyCode){//enter button to enter chat mode
-        	case 13: isUsingChat = !isUsingChat;
-        }
-    }
+		// A or Left Arrow
+		case 37: isMovingLeft = false; break;
+		case 65: isMovingLeft = false; break;
+		// D or Right Arrow
+		case 39: isMovingRight = false; break;
+		case 68: isMovingRight = false; break;
+		// S or Down Arrow
+		case 40: isMovingBackward = false; break;
+		case 83: isMovingBackward = false; break;
+		// W or Up Arrow
+		case 38: isMovingForward = false; break;
+		case 87: isMovingForward = false; break;
+		}
+	}
+	if (isConnectionReady) {
+		switch(event.keyCode){//enter button to enter chat mode
+		case 13: isUsingChat = !isUsingChat;
+		}
+	}
 }
 
 // Window resize listener
@@ -1100,72 +1105,73 @@ function onWindowResize() {
 var planetCycle = 0;
 var isMoonRising = true;
 function render() {
-    // House thing
-    if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].position.z += 0.01;
-    if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.x += 0.01;
-    if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.y += 0.01;
-    if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.z += 0.01;
+	// House thing
+	if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].position.z += 0.01;
+	if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.x += 0.01;
+	if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.y += 0.01;
+	if (objectList["ReeceHouse"] != null) objectList["ReeceHouse"].rotation.z += 0.01;
 
-    // Change time of day and lighting
-    time += timeScale;
-    if (time >= 1.8) time = 0.2;
-    ambientLight.color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
-    for (var i = 0; i < 6; i++) {
-    	skybox.material.materials[i].color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
-    }
-    scene.fog.color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
+	// Change time of day and lighting
+	time += timeScale;
+	if (time >= 1.8) time = 0.2;
+	ambientLight.color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
+	for (var i = 0; i < 6; i++) {
+		skybox.material.materials[i].color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
+	}
+	scene.fog.color.setRGB(time > 1 ? 2 - time : time, time > 1 ? 2 - time : time, time > 1 ? 2 - time + 0.2 : time + 0.2);
 
-    // Rotate the skybox
-    skybox.rotation.y += timeScale;
+	// Rotate the skybox
+	skybox.rotation.y += timeScale;
 
-    // Moon-sun cycle
-    //sphere.position.x += timeScale * 10;
-    //sphere.position.z += timeScale * 10;
-    //sphere.position.set(sphere.position.x + (time > 1 ? -timeScale * 1770 : timeScale * 1770), sphere.position.y + (time > 1 ? -timeScale * 1024 : timeScale * 1024), sphere.position.z + (time > 1 ? -timeScale * 1770 : timeScale * 1770));
-    planetCycle += isMoonRising ? timeScale * 1000 : -(timeScale * 1000);
-    sphere.position.x += isMoonRising ? timeScale * 1000 : -(timeScale * 1000);
-    sphere.position.y = Math.sqrt(495616 - (sphere.position.x ^ 2));
-    if (sphere.position.x >= 704) {
-    	isMoonRising = false;
-    } else if (sphere.position.x <= -704) {
-    	isMoonRising = true;
-    }
-    //console.log(sphere.position.y);
-    // Request animation frame
-    requestAnimationFrame(render);
+	// Moon-sun cycle
+	//sphere.position.x += timeScale * 10;
+	//sphere.position.z += timeScale * 10;
+	//sphere.position.set(sphere.position.x + (time > 1 ? -timeScale * 1770 : timeScale * 1770), sphere.position.y + (time > 1 ? -timeScale * 1024 : timeScale * 1024), sphere.position.z + (time > 1 ? -timeScale * 1770 : timeScale * 1770));
+	planetCycle += isMoonRising ? timeScale * 1000 : -(timeScale * 1000);
+	sphere.position.x += isMoonRising ? timeScale * 1000 : -(timeScale * 1000);
+	sphere.position.y = Math.sqrt(495616 - (sphere.position.x ^ 2));
+	if (sphere.position.x >= 704) {
+		isMoonRising = false;
+	} else if (sphere.position.x <= -704) {
+		isMoonRising = true;
+	}
+	//console.log(sphere.position.y);
+	// Request animation frame
+	requestAnimationFrame(render);
 
-    // Update controls, stats and render
-    if ((isLoggedIn && isMapDownloaded) || isDebugMode) {
-    	controls.update();
-    	if (stats != null) stats.update();
-    	renderer.render(scene, camera);
-    }
+	// Update controls, stats and render
+	if ((isLoggedIn && isMapDownloaded) || isDebugMode) {
+		controls.update();
+		if (stats != null) stats.update();
+		renderer.render(scene, camera);
+	}
 
-    // Handle chat visibility
-    if (!isUsingChat) {
-    	document.getElementById('chatMessageSendBox').style.visibility = 'hidden';
-    	document.getElementById("input").blur(); 
-    } else if (isUsingChat) {
-    	document.getElementById('chatMessageSendBox').style.visibility = 'visible';
-    	document.getElementById("input").focus();
-    }
+	// Handle chat visibility
+	if (!isUsingChat) {
+		document.getElementById('chatMessageSendBox').style.visibility = 'hidden';
+		document.getElementById("input").blur(); 
+	} else if (isUsingChat) {
+		document.getElementById('chatMessageSendBox').style.visibility = 'visible';
+		document.getElementById("input").focus();
+	}
 
-    // Sun animation
-    light.position.set(light.position.x * Math.cos(time > 1 ? -timeScale : timeScale) - light.position.y * Math.sin(time > 1 ? -timeScale : timeScale), light.position.y * Math.cos(time > 1 ? -timeScale : timeScale) + light.position.x * Math.sin(time > 1 ? -timeScale : timeScale), light.position.z);
-    light.shadowDarkness = Math.max(Math.min(light.shadowDarkness + (time > 1 ? timeScale : -timeScale), 0.7), 0.2);
+	// Sun animation
+	light.position.set(light.position.x * Math.cos(time > 1 ? -timeScale : timeScale) - light.position.y * Math.sin(time > 1 ? -timeScale : timeScale), light.position.y * Math.cos(time > 1 ? -timeScale : timeScale) + light.position.x * Math.sin(time > 1 ? -timeScale : timeScale), light.position.z);
+	light.shadowDarkness = Math.max(Math.min(light.shadowDarkness + (time > 1 ? timeScale : -timeScale), 0.7), 0.2);
 
-    // Intersect detection
-    var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-    projector.unprojectVector( vector, camera );
-    var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	// Intersect detection
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	projector.unprojectVector( vector, camera );
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 
-    // create an array containing all objects in the scene with which the ray intersects
-    var intersects = ray.intersectObjects( scene.children );
+	// create an array containing all objects in the scene with which the ray intersects
+	var intersects = ray.intersectObjects( scene.children );
 
-    // INTERSECTED = the object in the scene currently closest to the camera 
-    //      and intersected by the Ray projected from the mouse position    
-    
-    // if there is one (or more) intersections
+	// INTERSECTED = the object in the scene currently closest to the camera 
+	//      and intersected by the Ray projected from the mouse position    
+
+	// if there is one (or more) intersections
+	/*
     if ( intersects.length > 0 )
     {
         // if the closest object intersected is not the currently stored intersection object
@@ -1185,19 +1191,20 @@ function render() {
     	if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
     	INTERSECTED = null;
     }
+	 */
 } 
 
 // Called when an object is loaded
 function load() {
 	objectsLoaded += 1;
 	if (objectsLoaded >= (meshList.length + textureList.length)) {
-        // Called when all objects are loaded
-        if (document.getElementById('loading') != null) {
-        	var el = document.getElementById('loading');
-        	var remElement = (el.parentNode).removeChild(el);
-        	isLoading = false;
-        }
-    }
+		// Called when all objects are loaded
+		if (document.getElementById('loading') != null) {
+			var el = document.getElementById('loading');
+			var remElement = (el.parentNode).removeChild(el);
+			isLoading = false;
+		}
+	}
 }
 
 // Time to real time
@@ -1231,11 +1238,11 @@ function movement(){
 		if(isMovingBackward && !isMovingForward) {
 			player.translateZ(0.5);
 		}
-        // test
-        //player.position.y = getHeightmapY(256 + Math.round(player.position.x / 10.448979591836734693877551020408), Math.round(player.position.z / 10.448979591836734693877551020408));
-        // end test
-        sendCord(playerName,parseFloat(round(player.position.x)),parseFloat(round(player.position.z)),parseFloat(round(player.rotation.y)));
-    },33.3);
+		// test
+		//player.position.y = getHeightmapY(256 + Math.round(player.position.x / 10.448979591836734693877551020408), Math.round(player.position.z / 10.448979591836734693877551020408));
+		// end test
+		sendCord(playerName,parseFloat(round(player.position.x)),parseFloat(round(player.position.z)),parseFloat(round(player.rotation.y)));
+	},33.3);
 }
 
 // Called when an error occurs
@@ -1249,11 +1256,11 @@ function errorOccurred() {
 
 // Called when the error purges
 function errorStopped(){
-    $('#input').attr('disabled', 'disabled');//change to eneable plz im not sure about the syntax
-    isConnectionReady = true;
-    isError = true;
-    $('#chatBox').show();
-    $('#errorBox').hide();
+	$('#input').attr('disabled', 'disabled');//change to eneable plz im not sure about the syntax
+	isConnectionReady = true;
+	isError = true;
+	$('#chatBox').show();
+	$('#errorBox').hide();
 }
 
 function onDocumentMouseMove( event ) 
@@ -1262,8 +1269,21 @@ function onDocumentMouseMove( event )
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
+//TODO: Chat auto-resize and scroll at resize limit
+function addRawMessage(message)
+{
+	$('#content').append(message);
+	console.log($('#content'));
+	var elem = document.getElementById('content');
+	if (elem.style.height != 256) {
+		elem.style.height = elem.style.height + 32;//elem.height(elem.height() + 32);
+		console.log("Set chatBox height to " + elem.style.height);
+	} else {
+		elem.scrollTop = elem.scrollHeight;
+	}
+}
+
 // Copyright Luca Jegard and Reece Lecrivain 2014
 </script>
 </body>
 </html> 
-
